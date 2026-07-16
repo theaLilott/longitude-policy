@@ -86,14 +86,14 @@ function buildCapitol() {
   }
 
   /* ---------- animation ----------
-     Phase 1 (roll-in): the building rolls in from the right page
-     border toward the middle — line by line, each fading in and
-     sliding to its place from the right.
-     Phase 2 (wave): a slow band of low opacity travels across the
-     facade in the same direction, so lines fade out and reappear. */
-  const SWEEP = 1100; // ms for the reveal to cross the facade
-  const FADE = 500; // ms each line takes to fade in
+     The building slowly rolls in from the right page border,
+     line by line: each line fades in and slides to its place,
+     strictly staggered by position. Once the last line has
+     landed, the facade stays static and the loop stops. */
+  const SWEEP = 3400; // ms for the reveal to cross the facade
+  const FADE = 380; // ms each line takes to fade in
   const SLIDE = 26; // px each line slides in from the right
+  const SETTLED = 0.92; // final opacity of every line
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
   let start = null;
@@ -112,9 +112,10 @@ function buildCapitol() {
       } else if (l.el.hasAttribute("transform")) {
         l.el.removeAttribute("transform");
       }
-      l.el.setAttribute("opacity", (built * waveOpacity(l.x, t)).toFixed(3));
+      l.el.setAttribute("opacity", (built * SETTLED).toFixed(3));
     }
-    requestAnimationFrame(frame);
+
+    if (t < SWEEP + FADE) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
 }
