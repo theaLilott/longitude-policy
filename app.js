@@ -15,10 +15,10 @@ const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").mat
    Proportions follow the PDF mock: dominant dome, stubby wings. */
 function capitolHeight(u) {
   // Statue of Freedom + lantern spike (center line + one on each side)
-  if (u < 0.014) return 1.0;
-  if (u < 0.035) return 0.86;
+  if (u < 0.022) return 1.0;
+  if (u < 0.05) return 0.86;
   // Tholos (small colonnade under the lantern)
-  if (u < 0.07) return 0.78;
+  if (u < 0.09) return 0.78;
   // Dome — elliptical cap sitting on the drum
   if (u < 0.22) {
     const t = u / 0.22;
@@ -50,19 +50,17 @@ function buildCapitol() {
   const H = 600;
   const BASE = 596; // baseline y — building stands on the bottom edge
   const MAX_H = 560; // tallest line (statue)
-  const GAP = 5; // even spacing between lines
-  const STROKE = 1.5;
+  const GAP = 8; // even spacing between lines — fewer, more deliberate lines
+  const STROKE = 1.7;
 
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-  const n = Math.floor(W / GAP);
   const cx = W / 2;
   const half = W / 2 - 4;
+  const OFFSET = cx % GAP; // grid aligned so a line sits on the center axis
   const lines = [];
 
-  // grid aligned so one line sits exactly on the building's center axis
-  for (let i = 0; i <= n; i++) {
-    const x = i * GAP;
+  for (let x = OFFSET; x <= W; x += GAP) {
     const u = Math.abs(x - cx) / half;
     if (u > 1) continue;
     const h = capitolHeight(u) * MAX_H;
@@ -86,23 +84,39 @@ function buildCapitol() {
   }
 
   /* ---------- animation ----------
-     The building appears line by line from the right page border:
-     each line simply pops into place at full strength — no fading,
-     no movement. Once the last line is there, the loop stops and
-     the facade stays static. */
-  const SWEEP = 3400; // ms from the first (rightmost) to the last line
+     The building is drawn line by line from the right page border,
+     like a plotter: each line appears in place at full strength —
+     no fading, no movement — and the newest line glints gold
+     before settling to cream as the next one lands. Once the last
+     line is placed, the loop stops and the facade stays static. */
+  const SWEEP = 5200; // ms from the first (rightmost) to the last line
   const SETTLED = 0.92; // opacity of every placed line
+  const CREAM = "#f4ecd8";
+  const GOLD = "#e8ae33";
 
   let start = null;
+  let prevHead = null;
 
   function frame(now) {
     if (start === null) start = now;
     const t = now - start;
+    const cut = W - (t / SWEEP) * W; // the plotting position, moving right to left
 
+    let head = null;
     for (const l of lines) {
-      const appearAt = ((W - l.x) / W) * SWEEP;
-      l.el.setAttribute("opacity", t >= appearAt ? SETTLED : 0);
+      const placed = l.x >= cut;
+      l.el.setAttribute("opacity", placed ? SETTLED : 0);
+      if (placed && (head === null || l.x < head.x)) head = l;
     }
+
+    if (prevHead && prevHead !== head) prevHead.el.setAttribute("stroke", CREAM);
+    if (head && t < SWEEP) {
+      head.el.setAttribute("stroke", GOLD);
+      head.el.setAttribute("opacity", 1);
+    } else if (head) {
+      head.el.setAttribute("stroke", CREAM);
+    }
+    prevHead = head;
 
     if (t < SWEEP) requestAnimationFrame(frame);
   }

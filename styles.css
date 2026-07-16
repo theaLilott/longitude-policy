@@ -323,9 +323,30 @@ a { color: var(--cream); }
 
 .timeline li {
   counter-increment: step;
-  border-top: 2px solid var(--gold);
+  position: relative;
   padding-top: 1rem;
 }
+
+/* the gold rule draws itself in when the section reveals
+   (::after — ::before holds the step number) */
+.timeline li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) 0.2s;
+}
+
+.reveal.visible .timeline li::after { transform: scaleX(1); }
+
+.reveal.visible .timeline li:nth-child(2)::after { transition-delay: 0.4s; }
+.reveal.visible .timeline li:nth-child(3)::after { transition-delay: 0.6s; }
+.reveal.visible .timeline li:nth-child(4)::after { transition-delay: 0.8s; }
 
 .timeline li::before {
   content: counter(step, decimal-leading-zero);
@@ -522,8 +543,19 @@ a { color: var(--cream); }
   color: var(--cream);
 }
 
-/* ============ REVEAL ANIMATION ============ */
+/* ============ ENTRANCES & REVEALS ============ */
 
+/* hero copy rises in while the Capitol is being drawn */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero h1 { animation: rise 0.7s 0.05s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
+.hero-tagline { animation: rise 0.7s 0.2s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
+.hero-box { animation: rise 0.7s 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
+
+/* sections fade up as they enter the viewport */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -535,9 +567,34 @@ a { color: var(--cream); }
   transform: none;
 }
 
+/* ...and their cards arrive one after another */
+.reveal :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.3, 1),
+    transform 0.6s cubic-bezier(0.22, 0.7, 0.3, 1);
+}
+
+.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(2) { transition-delay: 0.12s; }
+.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(3) { transition-delay: 0.24s; }
+.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(4) { transition-delay: 0.36s; }
+.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(5) { transition-delay: 0.48s; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero h1, .hero-tagline, .hero-box { animation: none; }
+  .reveal,
+  .reveal :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .timeline li::after { transform: none; transition: none; }
 }
 
 /* ============ RESPONSIVE ============ */
