@@ -86,15 +86,12 @@ function buildCapitol() {
   }
 
   /* ---------- animation ----------
-     The building slowly rolls in from the right page border,
-     line by line: each line fades in and slides to its place,
-     strictly staggered by position. Once the last line has
-     landed, the facade stays static and the loop stops. */
-  const SWEEP = 3400; // ms for the reveal to cross the facade
-  const FADE = 380; // ms each line takes to fade in
-  const SLIDE = 26; // px each line slides in from the right
-  const SETTLED = 0.92; // final opacity of every line
-  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+     The building appears line by line from the right page border:
+     each line simply pops into place at full strength — no fading,
+     no movement. Once the last line is there, the loop stops and
+     the facade stays static. */
+  const SWEEP = 3400; // ms from the first (rightmost) to the last line
+  const SETTLED = 0.92; // opacity of every placed line
 
   let start = null;
 
@@ -103,19 +100,11 @@ function buildCapitol() {
     const t = now - start;
 
     for (const l of lines) {
-      const delay = ((W - l.x) / W) * SWEEP;
-      const bt = Math.min(Math.max((t - delay) / FADE, 0), 1);
-      const built = easeOut(bt);
-
-      if (bt < 1) {
-        l.el.setAttribute("transform", `translate(${((1 - built) * SLIDE).toFixed(2)} 0)`);
-      } else if (l.el.hasAttribute("transform")) {
-        l.el.removeAttribute("transform");
-      }
-      l.el.setAttribute("opacity", (built * SETTLED).toFixed(3));
+      const appearAt = ((W - l.x) / W) * SWEEP;
+      l.el.setAttribute("opacity", t >= appearAt ? SETTLED : 0);
     }
 
-    if (t < SWEEP + FADE) requestAnimationFrame(frame);
+    if (t < SWEEP) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
 }
