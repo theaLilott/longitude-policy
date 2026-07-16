@@ -14,19 +14,19 @@ const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").mat
    Returns height as a fraction of max height.
    Proportions follow the PDF mock: dominant dome, stubby wings. */
 function capitolHeight(u) {
-  // Statue of Freedom + lantern spike (center line + one on each side)
-  if (u < 0.022) return 1.0;
-  if (u < 0.05) return 0.86;
+  // Statue of Freedom — a short peak, three lines wide
+  if (u < 0.022) return 0.95;
+  if (u < 0.045) return 0.88;
   // Tholos (small colonnade under the lantern)
-  if (u < 0.09) return 0.78;
-  // Dome — elliptical cap sitting on the drum
-  if (u < 0.22) {
-    const t = u / 0.22;
-    return 0.48 + 0.28 * Math.sqrt(1 - t * t);
+  if (u < 0.07) return 0.84;
+  // Dome — wide, round elliptical cap sitting on the drum
+  if (u < 0.26) {
+    const t = u / 0.26;
+    return 0.46 + 0.33 * Math.sqrt(1 - t * t);
   }
   // Drum (colonnaded cylinder below the dome)
-  if (u < 0.27) return 0.48;
-  if (u < 0.31) return 0.42;
+  if (u < 0.3) return 0.46;
+  if (u < 0.34) return 0.4;
   // Central block with portico
   if (u < 0.52) return 0.34;
   // Connecting corridors (slightly lower)
@@ -160,18 +160,17 @@ function buildFooterWave() {
   requestAnimationFrame(frame);
 }
 
-/* ---------- scroll reveal ---------- */
+/* ---------- scroll reveal ----------
+   Sections (and their staggered children) animate in every time
+   they enter the viewport, not just on the first pass. */
 function initReveal() {
   const observer = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.add("visible");
-          observer.unobserve(e.target);
-        }
+        e.target.classList.toggle("visible", e.isIntersecting);
       }
     },
-    { threshold: 0.12 }
+    { threshold: 0.12, rootMargin: "0px 0px -5% 0px" }
   );
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 }
