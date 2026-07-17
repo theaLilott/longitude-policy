@@ -71,7 +71,7 @@ function buildCapitol() {
     line.setAttribute("x2", x);
     line.setAttribute("y2", BASE);
     line.setAttribute("y1", BASE - h);
-    line.setAttribute("stroke", "#f5f7fa");
+    line.setAttribute("stroke", "#f4efe1");
     line.setAttribute("stroke-width", STROKE);
     line.setAttribute("opacity", 0); // revealed by the roll-in sweep
     svg.appendChild(line);
@@ -91,8 +91,8 @@ function buildCapitol() {
      line is placed, the loop stops and the facade stays static. */
   const SWEEP = 5200; // ms from the first (rightmost) to the last line
   const SETTLED = 0.92; // opacity of every placed line
-  const PAPER = "#f5f7fa";
-  const RED = "#e04f4f";
+  const PAPER = "#f4efe1";
+  const RED = "#b23b3b";
 
   let start = null;
   let prevHead = null;
@@ -142,7 +142,7 @@ function buildFooterWave() {
     line.setAttribute("x2", x);
     line.setAttribute("y2", H);
     line.setAttribute("y1", H - 34);
-    line.setAttribute("stroke", "#f5f7fa");
+    line.setAttribute("stroke", "#f4efe1");
     line.setAttribute("stroke-width", 1.2);
     line.setAttribute("opacity", 0.25);
     svg.appendChild(line);
