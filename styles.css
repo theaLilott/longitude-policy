@@ -99,15 +99,20 @@ a { color: var(--paper); }
 
 .hero {
   display: grid;
-  /* copy on the left, Capitol taking the right and bleeding off the edge */
-  grid-template-columns: minmax(280px, 1fr) min(36vw, 600px);
+  /* copy centered in the left half, Capitol filling the right half
+     and bleeding off the page edge */
+  grid-template-columns: 1fr 1fr;
   align-items: end;
-  gap: 2.5rem;
-  padding: 4.5rem 0 0 max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+  padding: 4.5rem 0 0;
   min-height: 80vh;
 }
 
-.hero-copy { padding-bottom: 3.5rem; }
+.hero-copy {
+  align-self: center;
+  justify-self: center;
+  max-width: 38rem;
+  padding: 0 2rem 2rem;
+}
 
 .hero h1 {
   font-size: clamp(2.8rem, 6vw, 4.4rem);
@@ -159,11 +164,13 @@ a { color: var(--paper); }
 }
 
 #capitol {
-  /* wider than its column, so ~30% of the building is cut off
-     by the right edge of the page */
-  width: 143%;
+  /* wider than its column so the building is cut off by the right
+     page edge — the wider the screen, the more of it shows
+     (~30% cut on small screens, ~6% on very wide ones) */
+  width: clamp(106%, 30vw + 500px, 143%);
   height: auto;
   display: block;
+  opacity: 0.65; /* soften the bright lines against the navy */
 }
 
 /* ============ STATS ============ */
@@ -601,7 +608,7 @@ a { color: var(--paper); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; min-height: 0; padding: 3rem 0 0 2rem; }
   .hero-art { order: -1; }
-  .hero-copy { padding-bottom: 2.5rem; padding-right: 2rem; }
+  .hero-copy { justify-self: start; padding: 0 2rem 2.5rem 0; }
   .stats { grid-template-columns: 1fr 1fr; }
   .cards, .pillars { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 1.25rem; }
