@@ -1,16 +1,17 @@
 /* ============================================================
-   Longitude Policy — design tokens from website_idea.pdf
-   Deep teal ground, cream type, fine-line Capitol motif
+   Longitude Policy — design tokens
+   Dark navy ground, white type, red accent lines,
+   fine-line Capitol motif
    ============================================================ */
 
 :root {
-  --teal: #0b5866;
-  --teal-deep: #094a56;
-  --teal-line: rgba(244, 236, 216, 0.18);
-  --cream: #f4ecd8;
-  --cream-dim: rgba(244, 236, 216, 0.72);
-  --gold: #e8ae33;
-  --gold-deep: #c98f1d; /* for accents on the lighter teal */
+  --navy: #0c1b33;
+  --navy-deep: #081226;
+  --line: rgba(245, 247, 250, 0.16);
+  --paper: #f5f7fa;
+  --paper-dim: rgba(245, 247, 250, 0.72);
+  --red: #e04f4f;
+  --red-deep: #b83a3a;
   --font-display: "Poppins", "Helvetica Neue", sans-serif;
   --font-body: "Hanken Grotesk", "Helvetica Neue", sans-serif;
   --max-w: 1160px;
@@ -21,8 +22,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--teal);
-  color: var(--cream);
+  background: var(--navy);
+  color: var(--paper);
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.65;
@@ -31,17 +32,18 @@ body {
 
 h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; }
 
-a { color: var(--cream); }
+a { color: var(--paper); }
 
 /* ============ NAV ============ */
 
 .nav {
+  max-width: var(--max-w);
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  /* the nav rule runs all the way to the right page border */
-  padding: 1.75rem 0 0 max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+  padding: 1.75rem 2rem 0;
 }
 
 .nav-brand {
@@ -56,9 +58,8 @@ a { color: var(--cream); }
   display: flex;
   align-items: center;
   gap: 2.25rem;
-  border-bottom: 1px solid var(--cream);
+  border-bottom: 1px solid var(--paper);
   padding-bottom: 0.9rem;
-  padding-right: 3rem; /* keeps links off the edge; the rule continues to it */
   flex: 1;
   justify-content: flex-end;
 }
@@ -75,20 +76,20 @@ a { color: var(--cream); }
 
 .btn {
   display: inline-block;
-  background: var(--cream);
-  color: var(--teal);
+  background: var(--paper);
+  color: var(--navy);
   font-family: var(--font-display);
   font-weight: 600;
   text-decoration: none;
   padding: 0.8rem 1.6rem;
   border-radius: 3px;
-  border: 1px solid var(--cream);
+  border: 1px solid var(--paper);
   transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .btn:hover { transform: translateY(-2px); }
 
-.btn-ghost { background: transparent; color: var(--cream); }
+.btn-ghost { background: transparent; color: var(--paper); }
 
 .btn-small { padding: 0.4rem 1rem; font-size: 0.95rem; }
 
@@ -97,12 +98,14 @@ a { color: var(--cream); }
 /* ============ HERO ============ */
 
 .hero {
+  max-width: var(--max-w);
+  margin: 0 auto;
   display: grid;
-  /* copy on the left, Capitol taking ~2/3 and bleeding to the right edge */
-  grid-template-columns: minmax(280px, 1fr) min(36vw, 600px);
+  /* copy on the left, Capitol fully inside the page on the right */
+  grid-template-columns: minmax(300px, 6fr) minmax(280px, 5fr);
   align-items: end;
-  gap: 2.5rem;
-  padding: 4.5rem 0 0 max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+  gap: 3rem;
+  padding: 4.5rem 2rem 0;
   min-height: 80vh;
 }
 
@@ -117,12 +120,12 @@ a { color: var(--cream); }
 .hero-tagline {
   font-size: clamp(1.25rem, 2.4vw, 1.6rem);
   margin-top: 0.75rem;
-  color: var(--cream-dim);
+  color: var(--paper-dim);
 }
 
 .hero-box {
-  border: 1px solid var(--cream);
-  border-left: 4px solid var(--gold-deep);
+  border: 1px solid var(--paper);
+  border-left: 4px solid var(--red);
   padding: 2.25rem 2rem;
   margin-top: 2.5rem;
   max-width: 34rem;
@@ -133,7 +136,7 @@ a { color: var(--cream); }
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--gold);
+  color: var(--paper);
   margin-bottom: 0.6rem;
 }
 
@@ -142,7 +145,7 @@ a { color: var(--cream); }
   margin-bottom: 0.75rem;
 }
 
-.hero-box p { color: var(--cream-dim); }
+.hero-box p { color: var(--paper-dim); }
 
 .hero-ctas {
   display: flex;
@@ -154,13 +157,10 @@ a { color: var(--cream); }
 .hero-art {
   min-width: 0;
   align-self: end;
-  overflow: hidden; /* the Capitol bleeds off the right page border */
 }
 
 #capitol {
-  /* wider than its column, so ~30% of the building is cut off
-     by the right edge of the page */
-  width: 143%;
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -170,16 +170,13 @@ a { color: var(--cream); }
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--teal-line);
-  border: 1px solid var(--teal-line);
+  gap: 2rem;
   margin-bottom: 3.5rem;
 }
 
 .stat {
-  background: var(--teal-deep);
-  padding: 2.25rem 1.5rem;
-  text-align: center;
+  border-top: 2px solid var(--red);
+  padding-top: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -189,12 +186,12 @@ a { color: var(--cream); }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.9rem;
-  color: var(--gold);
+  color: var(--paper);
 }
 
 .stat-label {
   font-size: 0.95rem;
-  color: var(--cream-dim);
+  color: var(--paper-dim);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -209,7 +206,7 @@ a { color: var(--cream); }
 
 .section-alt {
   max-width: none;
-  background: var(--teal-deep);
+  background: var(--navy-deep);
   padding-left: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
   padding-right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
 }
@@ -218,7 +215,7 @@ a { color: var(--cream); }
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--gold);
+  color: var(--paper);
   margin-bottom: 1rem;
 }
 
@@ -231,7 +228,7 @@ a { color: var(--cream); }
   font-size: 1.25rem;
   max-width: 46rem;
   margin-bottom: 3rem;
-  color: var(--cream-dim);
+  color: var(--paper-dim);
 }
 
 .two-col {
@@ -251,20 +248,20 @@ a { color: var(--cream); }
 }
 
 .card {
-  border: 1px solid var(--teal-line);
+  border: 1px solid var(--line);
   padding: 2rem;
 }
 
 .card h3 { font-size: 1.35rem; margin-bottom: 0.6rem; }
 
-.card p { color: var(--cream-dim); font-size: 1rem; }
+.card p { color: var(--paper-dim); font-size: 1rem; }
 
 .card-lines {
   height: 26px;
   margin-bottom: 1.4rem;
   background: repeating-linear-gradient(
     90deg,
-    var(--gold) 0 1px,
+    var(--red) 0 1px,
     transparent 1px 5px
   );
   width: 72px;
@@ -280,14 +277,15 @@ a { color: var(--cream); }
 }
 
 .pillar {
-  border: 1px solid var(--teal-line);
-  background: var(--teal);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--red);
+  background: var(--navy);
   padding: 2rem;
 }
 
 .pillar-num {
   font-family: var(--font-display);
-  color: var(--gold);
+  color: var(--paper);
   font-size: 0.95rem;
   letter-spacing: 0.1em;
 }
@@ -298,8 +296,8 @@ a { color: var(--cream); }
 
 .pillar li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--teal-line);
-  color: var(--cream-dim);
+  border-bottom: 1px solid var(--line);
+  color: var(--paper-dim);
   font-size: 1rem;
 }
 
@@ -327,7 +325,7 @@ a { color: var(--cream); }
   padding-top: 1rem;
 }
 
-/* the gold rule draws itself in when the section reveals
+/* the red rule draws itself in when the section reveals
    (::after — ::before holds the step number) */
 .timeline li::after {
   content: "";
@@ -336,7 +334,7 @@ a { color: var(--cream); }
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--gold);
+  background: var(--red);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) 0.2s;
@@ -351,7 +349,7 @@ a { color: var(--cream); }
 .timeline li::before {
   content: counter(step, decimal-leading-zero);
   font-family: var(--font-display);
-  color: var(--gold);
+  color: var(--paper);
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   display: block;
@@ -365,7 +363,7 @@ a { color: var(--cream); }
   margin-bottom: 0.3rem;
 }
 
-.timeline li span { color: var(--cream-dim); font-size: 0.98rem; }
+.timeline li span { color: var(--paper-dim); font-size: 0.98rem; }
 
 /* ============ CTA ============ */
 
@@ -374,7 +372,7 @@ a { color: var(--cream); }
   text-align: center;
 }
 
-.cta-note { margin-top: 1.25rem; color: var(--cream-dim); }
+.cta-note { margin-top: 1.25rem; color: var(--paper-dim); }
 
 /* ============ EVENTS ============ */
 
@@ -385,7 +383,7 @@ a { color: var(--cream); }
 }
 
 .event {
-  border: 1px solid var(--teal-line);
+  border: 1px solid var(--line);
   padding: 2.25rem;
   display: flex;
   flex-direction: column;
@@ -393,7 +391,7 @@ a { color: var(--cream); }
 }
 
 .event-date {
-  color: var(--gold);
+  color: var(--paper);
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -401,9 +399,9 @@ a { color: var(--cream); }
 
 .event h3 { font-size: 1.4rem; }
 
-.event p { color: var(--cream-dim); flex: 1; }
+.event p { color: var(--paper-dim); flex: 1; }
 
-.event-meta { font-size: 0.95rem; color: var(--cream-dim); }
+.event-meta { font-size: 0.95rem; color: var(--paper-dim); }
 
 /* ============ PARTNERS (inside DC Intensive) ============ */
 
@@ -420,7 +418,7 @@ a { color: var(--cream); }
 .partner {
   display: flex;
   align-items: center;
-  border: 1px solid var(--teal-line);
+  border: 1px solid var(--line);
   padding: 1.1rem 1.6rem;
   font-family: var(--font-display);
   font-weight: 600;
@@ -448,25 +446,25 @@ a { color: var(--cream); }
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  border: 1px solid var(--cream);
+  border: 1px solid var(--paper);
   margin: 0 auto 1rem;
   background: repeating-linear-gradient(
     90deg,
-    var(--teal-line) 0 1px,
+    var(--line) 0 1px,
     transparent 1px 6px
   );
 }
 
 .person h3 { font-size: 1.15rem; }
 
-.person p { color: var(--cream-dim); font-size: 0.95rem; }
+.person p { color: var(--paper-dim); font-size: 0.95rem; }
 
 /* ============ FAQ ============ */
 
 .faq { max-width: 48rem; }
 
 .faq details {
-  border-bottom: 1px solid var(--teal-line);
+  border-bottom: 1px solid var(--line);
 }
 
 .faq summary {
@@ -485,7 +483,7 @@ a { color: var(--cream); }
 
 .faq summary::after {
   content: "+";
-  color: var(--gold);
+  color: var(--paper);
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -494,14 +492,14 @@ a { color: var(--cream); }
 
 .faq details p {
   padding: 0 0 1.5rem;
-  color: var(--cream-dim);
+  color: var(--paper-dim);
   max-width: 44rem;
 }
 
 /* ============ FOOTER ============ */
 
 .footer {
-  background: var(--teal-deep);
+  background: var(--navy-deep);
   margin-top: 0;
 }
 
@@ -525,14 +523,14 @@ a { color: var(--cream); }
 
 .footer h2 { font-size: 2.2rem; margin-bottom: 0.75rem; }
 
-.footer p { color: var(--cream-dim); margin-bottom: 1.75rem; }
+.footer p { color: var(--paper-dim); margin-bottom: 1.75rem; }
 
 .footer-meta {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   text-align: right;
-  color: var(--cream-dim);
+  color: var(--paper-dim);
   font-size: 0.95rem;
 }
 
@@ -540,7 +538,7 @@ a { color: var(--cream); }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--cream);
+  color: var(--paper);
 }
 
 /* ============ ENTRANCES & REVEALS ============ */
@@ -600,9 +598,9 @@ a { color: var(--cream); }
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; min-height: 0; padding: 3rem 0 0 2rem; }
+  .hero { grid-template-columns: 1fr; min-height: 0; padding: 3rem 2rem 0; }
   .hero-art { order: -1; }
-  .hero-copy { padding-bottom: 2.5rem; padding-right: 2rem; }
+  .hero-copy { padding-bottom: 2.5rem; }
   .stats { grid-template-columns: 1fr 1fr; }
   .cards, .pillars { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 1.25rem; }
