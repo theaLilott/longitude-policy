@@ -110,12 +110,17 @@ function buildCapitol() {
       if (placed && (head === null || l.x < head.x)) head = l;
     }
 
-    if (prevHead && prevHead !== head) prevHead.el.setAttribute("stroke", PAPER);
+    if (prevHead && prevHead !== head) {
+      prevHead.el.setAttribute("stroke", PAPER);
+      prevHead.el.setAttribute("stroke-width", STROKE);
+    }
     if (head && t < SWEEP) {
       head.el.setAttribute("stroke", RED);
+      head.el.setAttribute("stroke-width", 3.2);
       head.el.setAttribute("opacity", 1);
     } else if (head) {
       head.el.setAttribute("stroke", PAPER);
+      head.el.setAttribute("stroke-width", STROKE);
     }
     prevHead = head;
 
@@ -156,32 +161,27 @@ function startTwinkle(lines, ink, red, settled, baseWidth) {
 }
 
 /* ---------- footer strip ----------
-   Static longitude lines on the light ground, dipping into the navy
-   band: same navy-with-occasional-red language as the Capitol, no
-   animation. Line heights vary gently so the strip reads as a quiet
-   skyline rather than a solid bar. */
+   Uniform cream longitude lines on the navy band, static: the
+   original footer look, without the sweep animation. */
 function buildFooterWave() {
   const svg = document.getElementById("footer-wave");
   if (!svg) return;
 
   const W = 1600;
   const H = 90;
-  const GAP = 8;
+  const GAP = 6;
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.setAttribute("preserveAspectRatio", "none");
 
-  let i = 0;
-  for (let x = 4; x < W; x += GAP, i++) {
+  for (let x = 3; x < W; x += GAP) {
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    const h = 26 + 14 * Math.abs(Math.sin(i / 7)); // gentle height variation
-    const red = i % 13 === 5;
     line.setAttribute("x1", x);
     line.setAttribute("x2", x);
     line.setAttribute("y2", H);
-    line.setAttribute("y1", H - h);
-    line.setAttribute("stroke", red ? "#6e1423" : "#16294a");
-    line.setAttribute("stroke-width", red ? 2.4 : 1.4);
-    line.setAttribute("opacity", red ? 0.85 : 0.4);
+    line.setAttribute("y1", H - 34);
+    line.setAttribute("stroke", "#f4efe1");
+    line.setAttribute("stroke-width", 1.2);
+    line.setAttribute("opacity", 0.25);
     svg.appendChild(line);
   }
 }
