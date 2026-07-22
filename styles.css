@@ -190,6 +190,19 @@ a { color: var(--ink); }
   margin: 0 auto;
 }
 
+.manifesto-more {
+  max-width: 54rem;
+  margin: 1.75rem auto 0;
+}
+
+.manifesto-more a {
+  font-size: 1.05rem;
+  color: var(--ink-dim);
+  text-underline-offset: 4px;
+}
+
+.manifesto-more a:hover { color: var(--ink); }
+
 .hero-art {
   min-width: 0;
   align-self: end;
