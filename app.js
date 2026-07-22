@@ -164,31 +164,46 @@ function startTwinkle(lines, ink, red, settled, baseWidth) {
 }
 
 /* ---------- footer strip ----------
-   Uniform cream longitude lines on the navy band, static. Drawn at
-   1 svg unit = 1 css px (viewBox matches the element width) so line
-   thickness and spacing stay identical on every screen size, and
-   rebuilt on resize. */
+   Clear white longitude lines on the navy band, with the same red
+   twinkle as the Capitol. Drawn at 1 svg unit = 1 css px (viewBox
+   matches the element width) so line thickness and spacing stay
+   identical on every screen size, and rebuilt on resize. */
 function buildFooterWave() {
   const svg = document.getElementById("footer-wave");
   if (!svg) return;
+
+  const WHITE = "#ffffff";
+  const RED = "#a4161a"; // brighter than the wine so it reads on navy
+  let lines = [];
 
   function draw() {
     const W = Math.max(320, Math.round(svg.clientWidth || 1600));
     const H = 90;
     const GAP = 10;
     svg.innerHTML = "";
+    lines = [];
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-    for (let x = 5; x < W; x += GAP) {
+    let i = 0;
+    for (let x = 5; x < W; x += GAP, i++) {
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       line.setAttribute("x1", x);
       line.setAttribute("x2", x);
       line.setAttribute("y2", H);
       line.setAttribute("y1", H - 34);
-      line.setAttribute("stroke", "#f4efe1");
+      line.setAttribute("stroke", WHITE);
       line.setAttribute("stroke-width", 1.6);
-      line.setAttribute("opacity", 0.3);
+      line.setAttribute("opacity", 0.95);
+      if (REDUCED_MOTION && i % 13 === 5) {
+        // static red accents instead of the twinkle
+        line.setAttribute("stroke", RED);
+        line.setAttribute("stroke-width", 3);
+      } else if (!REDUCED_MOTION) {
+        line.style.transition =
+          "stroke 0.6s ease, opacity 0.6s ease, stroke-width 0.6s ease";
+      }
       svg.appendChild(line);
+      lines.push(line);
     }
   }
 
@@ -198,6 +213,19 @@ function buildFooterWave() {
     clearTimeout(t);
     t = setTimeout(draw, 200);
   });
+
+  if (!REDUCED_MOTION) {
+    setInterval(() => {
+      const l = lines[Math.floor(Math.random() * lines.length)];
+      if (!l) return;
+      l.setAttribute("stroke", RED);
+      l.setAttribute("stroke-width", 3.2);
+      setTimeout(() => {
+        l.setAttribute("stroke", WHITE);
+        l.setAttribute("stroke-width", 1.6);
+      }, 1600 + Math.random() * 1400);
+    }, 900);
+  }
 }
 
 /* ---------- mobile nav toggle ---------- */
