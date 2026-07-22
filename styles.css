@@ -228,6 +228,15 @@ a { color: var(--paper); }
   padding-right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
 }
 
+/* light interlude: paper ground, navy type */
+.section-light {
+  max-width: none;
+  background: var(--paper);
+  color: var(--navy);
+  padding-left: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+  padding-right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+}
+
 .section-kicker {
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -285,65 +294,39 @@ a { color: var(--paper); }
   width: 72px;
 }
 
-/* ============ PHASES (program structure) ============ */
+/* ============ STEPS (program structure) ============ */
 
-.phases {
+.steps { margin: 4rem auto 0; max-width: 60rem; }
+
+.step {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 1.5rem;
-  margin: 3rem auto;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 2.5rem;
+  padding: 2.75rem 0;
 }
 
-.phase {
-  border: 1px solid var(--line);
-  border-top: 2px solid var(--red);
-  background: var(--navy);
-  padding: 2rem;
-}
+.step + .step { border-top: 1px solid var(--line); }
 
-.phase-days {
+.step-num {
   font-family: var(--font-display);
-  color: var(--paper);
+  color: var(--red);
   font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
-.phase h3 { font-size: 1.45rem; margin: 0.5rem 0 1rem; }
+.step-head h3 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
 
-.phase p { color: var(--paper-dim); font-size: 1rem; }
+.step-body p { color: var(--paper-dim); max-width: 40rem; }
 
-.role-grid {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
+.step-body p + p { margin-top: 1.25rem; }
 
-.role-grid li {
-  border: 1px solid var(--line);
-  padding: 0.45rem 0.85rem;
-  font-size: 0.92rem;
+.step-roles {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
   color: var(--paper);
-}
-
-.exercise-callout {
-  border: 1px solid var(--paper);
-  border-left: 4px solid var(--red);
-  padding: 2.25rem 2rem;
-  max-width: 54rem;
-  margin: 3rem 0 0;
-}
-
-.exercise-callout h3 { font-size: 1.45rem; margin-bottom: 0.75rem; }
-
-.exercise-callout p { color: var(--paper-dim); }
-
-.program-note {
-  margin-top: 2.5rem;
-  max-width: 46rem;
-  color: var(--paper-dim);
+  opacity: 0.85;
 }
 
 /* ============ SPEAKERS ============ */
@@ -370,16 +353,14 @@ a { color: var(--paper); }
 
 .speakers h4 { font-family: var(--font-display); font-size: 1.05rem; }
 
-/* ============ HONEST NOTE ============ */
+.speakers .person p { color: var(--paper-dim); font-size: 0.95rem; }
 
-.honest-note {
-  margin-top: 3.5rem;
-  max-width: 54rem;
-  border-left: 4px solid var(--red);
-  padding-left: 1.75rem;
+.speakers-note {
+  margin-top: 2rem;
+  color: var(--paper-dim);
+  font-style: italic;
+  font-size: 0.98rem;
 }
-
-.honest-note p { color: var(--paper-dim); font-size: 1.1rem; }
 
 /* ============ CTA ============ */
 
@@ -402,7 +383,7 @@ a { color: var(--paper); }
 
 .person { text-align: center; }
 
-.person > p {
+.team .person > p {
   text-align: left;
   margin-top: 0.75rem;
 }
@@ -552,28 +533,28 @@ a { color: var(--paper); }
 }
 
 /* ...and their cards arrive one after another */
-.reveal :is(.stat, .phase, .card, .person, .faq details) {
+.reveal :is(.stat, .step, .card, .person, .faq details) {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.3, 1),
     transform 0.6s cubic-bezier(0.22, 0.7, 0.3, 1);
 }
 
-.reveal.visible :is(.stat, .phase, .card, .person, .faq details) {
+.reveal.visible :is(.stat, .step, .card, .person, .faq details) {
   opacity: 1;
   transform: none;
 }
 
-.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(2) { transition-delay: 0.12s; }
-.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(3) { transition-delay: 0.24s; }
-.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(4) { transition-delay: 0.36s; }
-.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(5) { transition-delay: 0.48s; }
+.reveal.visible :is(.stat, .step, .card, .person, .faq details):nth-child(2) { transition-delay: 0.12s; }
+.reveal.visible :is(.stat, .step, .card, .person, .faq details):nth-child(3) { transition-delay: 0.24s; }
+.reveal.visible :is(.stat, .step, .card, .person, .faq details):nth-child(4) { transition-delay: 0.36s; }
+.reveal.visible :is(.stat, .step, .card, .person, .faq details):nth-child(5) { transition-delay: 0.48s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero h1, .hero-tagline, .hero-sub, .hero-status, .hero-ctas { animation: none; }
   .reveal,
-  .reveal :is(.stat, .phase, .card, .person, .faq details) {
+  .reveal :is(.stat, .step, .card, .person, .faq details) {
     opacity: 1;
     transform: none;
     transition: none;
@@ -587,7 +568,8 @@ a { color: var(--paper); }
   .hero-art { order: -1; }
   .hero-copy { justify-self: start; padding: 0 2rem 2.5rem 0; }
   .stats { grid-template-columns: 1fr 1fr; }
-  .cards, .phases, .team { grid-template-columns: 1fr; }
+  .cards, .team { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 1fr; gap: 1rem; }
   .speakers { grid-template-columns: 1fr 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 1.25rem; }
   .footer-inner { grid-template-columns: 1fr; }
