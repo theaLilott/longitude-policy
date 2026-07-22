@@ -82,7 +82,11 @@ a { color: var(--ink); }
   border: none;
   padding: 8px 4px;
   cursor: pointer;
+  transition: transform 0.25s ease;
 }
+
+/* open menu: the three lines turn vertical, like lines of longitude */
+.nav.nav-open .nav-toggle { transform: rotate(90deg); }
 
 .nav-toggle span {
   display: block;
