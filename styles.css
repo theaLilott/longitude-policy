@@ -82,11 +82,12 @@ a { color: var(--ink); }
   border: none;
   padding: 8px 4px;
   cursor: pointer;
-  transition: transform 0.25s ease;
+  transition: transform 0.15s ease;
 }
 
-/* open menu: the three lines turn vertical, like lines of longitude */
-.nav.nav-open .nav-toggle { transform: rotate(90deg); }
+/* open menu: the three lines turn vertical, like lines of longitude,
+   rotating inward toward the page rather than out of it */
+.nav.nav-open .nav-toggle { transform: rotate(-90deg); }
 
 .nav-toggle span {
   display: block;
@@ -322,6 +323,14 @@ a { color: var(--ink); }
   width: 44px;
   opacity: 0.75;
 }
+
+.apply-note {
+  margin: 2.5rem auto 0;
+  max-width: 60rem;
+  color: var(--ink-dim);
+}
+
+.apply-note strong { color: var(--ink); }
 
 /* ============ STEPS (numbered rail: the eye follows the line) ============ */
 
@@ -673,6 +682,9 @@ a { color: var(--ink); }
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* full-row basis so the menu always wraps below the bar, never
+       beside it when there happens to be horizontal room */
+    flex: 0 0 100%;
     width: 100%;
     gap: 1.1rem;
     padding: 1.1rem 0 0.4rem;

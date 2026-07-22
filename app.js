@@ -88,44 +88,58 @@ function buildCapitol() {
   }
 
   /* ---------- animation ----------
-     The building is drawn line by line from the right page border,
-     like a plotter: each line appears in place at full strength —
-     no fading, no movement — and the newest line glints gold
-     before settling to cream as the next one lands. Once the last
-     line is placed, the loop stops and the facade stays static. */
-  const SWEEP = 5200; // ms from the first (rightmost) to the last line
+     The building is drawn line by line like a plotter: each line
+     appears in place at full strength, and the newest line glows red
+     and thick before settling to navy as the next one lands. On wide
+     screens the plotter sweeps in from the right page border; on
+     stacked (mobile) layouts, where the whole building is visible,
+     it grows from the center line outward to both sides at once. */
+  const CENTER_OUT = window.matchMedia("(max-width: 900px)").matches;
+  const SWEEP = CENTER_OUT ? 3800 : 5200; // ms for the full draw
   const SETTLED = 0.92; // opacity of every placed line
   const PAPER = "#16294a"; // settled stroke: navy ink on the paper ground
   const RED = "#6e1423";
 
   let start = null;
-  let prevHead = null;
 
   function frame(now) {
     if (start === null) start = now;
     const t = now - start;
-    const cut = W - (t / SWEEP) * W; // the plotting position, moving right to left
+    const p = Math.min(1, t / SWEEP);
+    const frontier = [];
 
-    let head = null;
+    if (CENTER_OUT) {
+      const reach = p * (W / 2);
+      let left = null;
+      let right = null;
+      for (const l of lines) {
+        l.placed = Math.abs(l.x - cx) <= reach;
+        if (!l.placed) continue;
+        if (l.x <= cx && (left === null || l.x < left.x)) left = l;
+        if (l.x >= cx && (right === null || l.x > right.x)) right = l;
+      }
+      if (left) frontier.push(left);
+      if (right && right !== left) frontier.push(right);
+    } else {
+      const cut = W - p * W; // plotting position, moving right to left
+      let head = null;
+      for (const l of lines) {
+        l.placed = l.x >= cut;
+        if (l.placed && (head === null || l.x < head.x)) head = l;
+      }
+      if (head) frontier.push(head);
+    }
+
     for (const l of lines) {
-      const placed = l.x >= cut;
-      l.el.setAttribute("opacity", placed ? SETTLED : 0);
-      if (placed && (head === null || l.x < head.x)) head = l;
+      if (!l.placed) {
+        l.el.setAttribute("opacity", 0);
+        continue;
+      }
+      const isHead = t < SWEEP && frontier.includes(l);
+      l.el.setAttribute("stroke", isHead ? RED : PAPER);
+      l.el.setAttribute("stroke-width", isHead ? 3.2 : STROKE);
+      l.el.setAttribute("opacity", isHead ? 1 : SETTLED);
     }
-
-    if (prevHead && prevHead !== head) {
-      prevHead.el.setAttribute("stroke", PAPER);
-      prevHead.el.setAttribute("stroke-width", STROKE);
-    }
-    if (head && t < SWEEP) {
-      head.el.setAttribute("stroke", RED);
-      head.el.setAttribute("stroke-width", 3.2);
-      head.el.setAttribute("opacity", 1);
-    } else if (head) {
-      head.el.setAttribute("stroke", PAPER);
-      head.el.setAttribute("stroke-width", STROKE);
-    }
-    prevHead = head;
 
     if (t < SWEEP) requestAnimationFrame(frame);
   }
