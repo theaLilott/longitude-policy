@@ -71,7 +71,7 @@ function buildCapitol() {
     line.setAttribute("x2", x);
     line.setAttribute("y2", BASE);
     line.setAttribute("y1", BASE - h);
-    line.setAttribute("stroke", "#f4efe1");
+    line.setAttribute("stroke", "#16294a");
     line.setAttribute("stroke-width", STROKE);
     line.setAttribute("opacity", 0); // revealed by the roll-in sweep
     svg.appendChild(line);
@@ -91,7 +91,7 @@ function buildCapitol() {
      line is placed, the loop stops and the facade stays static. */
   const SWEEP = 5200; // ms from the first (rightmost) to the last line
   const SETTLED = 0.92; // opacity of every placed line
-  const PAPER = "#f4efe1";
+  const PAPER = "#16294a"; // settled stroke: navy ink on the paper ground
   const RED = "#b23b3b";
 
   let start = null;
@@ -121,6 +121,15 @@ function buildCapitol() {
     if (t < SWEEP) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  /* rAF pauses while the window is hidden or occluded, which can leave
+     the drawing frozen mid-sweep; guarantee the finished facade */
+  setTimeout(() => {
+    for (const l of lines) {
+      l.el.setAttribute("stroke", PAPER);
+      l.el.setAttribute("opacity", SETTLED);
+    }
+  }, SWEEP + 600);
 }
 
 /* ---------- footer strip: uniform lines with the same

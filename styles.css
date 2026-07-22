@@ -1,15 +1,19 @@
 /* ============================================================
-   Longitude Policy — design tokens
-   Dark navy ground, white type, red accent lines,
-   fine-line Capitol motif
+   Longitude DC Intensive — design tokens
+   Light paper ground, navy ink, red accent lines,
+   fine-line Capitol motif; navy footer as the closing band
    ============================================================ */
 
 :root {
+  --bg: #f4efe1;
+  --bg-alt: #ece5d1;
+  --ink: #16294a;
+  --ink-dim: rgba(22, 41, 74, 0.72);
+  --line: rgba(22, 41, 74, 0.18);
   --navy: #16294a;
   --navy-deep: #0f1e3a;
-  --line: rgba(244, 239, 225, 0.16);
-  --paper: #f4efe1;
-  --paper-dim: rgba(244, 239, 225, 0.72);
+  --cream: #f4efe1;
+  --cream-dim: rgba(244, 239, 225, 0.72);
   --red: #b23b3b;
   --red-deep: #8f2e2e;
   --font-display: "Poppins", "Helvetica Neue", sans-serif;
@@ -22,8 +26,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--navy);
-  color: var(--paper);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.65;
@@ -32,7 +36,7 @@ body {
 
 h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; }
 
-a { color: var(--paper); }
+a { color: var(--ink); }
 
 /* ============ NAV ============ */
 
@@ -57,7 +61,7 @@ a { color: var(--paper); }
   display: flex;
   align-items: center;
   gap: 2.25rem;
-  border-bottom: 1px solid var(--paper);
+  border-bottom: 1px solid var(--ink);
   padding-bottom: 0.9rem;
   padding-right: 2rem; /* keeps links off the edge; the rule continues to it */
   flex: 1;
@@ -76,20 +80,20 @@ a { color: var(--paper); }
 
 .btn {
   display: inline-block;
-  background: var(--paper);
-  color: var(--navy);
+  background: var(--navy);
+  color: var(--cream);
   font-family: var(--font-display);
   font-weight: 600;
   text-decoration: none;
   padding: 0.8rem 1.6rem;
   border-radius: 3px;
-  border: 1px solid var(--paper);
+  border: 1px solid var(--navy);
   transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .btn:hover { transform: translateY(-2px); }
 
-.btn-ghost { background: transparent; color: var(--paper); }
+.btn-ghost { background: transparent; color: var(--ink); }
 
 .btn-small { padding: 0.4rem 1rem; font-size: 0.95rem; }
 
@@ -125,27 +129,27 @@ a { color: var(--paper); }
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--paper);
+  color: var(--red);
   margin-bottom: 1rem;
 }
 
 .hero-tagline {
   font-size: clamp(1.25rem, 2.4vw, 1.6rem);
   margin-top: 0.75rem;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .hero-sub {
   margin-top: 1.25rem;
   max-width: 32rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   font-size: 1.1rem;
 }
 
 .hero-status {
   margin-top: 1.75rem;
   font-style: italic;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
 }
 
 .hero-ctas {
@@ -174,12 +178,12 @@ a { color: var(--paper); }
 
 #capitol {
   /* wider than its column so the building is cut off by the right
-     page edge — the wider the screen, the more of it shows
+     page edge; the wider the screen, the more of it shows
      (~30% cut on small screens, ~6% on very wide ones) */
   width: clamp(106%, 30vw + 500px, 143%);
   height: auto;
   display: block;
-  opacity: 0.65; /* soften the bright lines against the navy */
+  opacity: 0.55; /* soften the navy lines against the paper */
 }
 
 /* ============ STATS ============ */
@@ -203,12 +207,12 @@ a { color: var(--paper); }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.9rem;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .stat-label {
   font-size: 0.95rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -223,16 +227,7 @@ a { color: var(--paper); }
 
 .section-alt {
   max-width: none;
-  background: var(--navy-deep);
-  padding-left: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
-  padding-right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
-}
-
-/* light interlude: paper ground, navy type */
-.section-light {
-  max-width: none;
-  background: var(--paper);
-  color: var(--navy);
+  background: var(--bg-alt);
   padding-left: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
   padding-right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
 }
@@ -241,7 +236,7 @@ a { color: var(--paper); }
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--paper);
+  color: var(--red);
   margin-bottom: 1rem;
 }
 
@@ -254,7 +249,7 @@ a { color: var(--paper); }
   font-size: 1.25rem;
   max-width: 46rem;
   margin-bottom: 3rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
 }
 
 .two-col {
@@ -270,7 +265,7 @@ a { color: var(--paper); }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  margin-top: 3.5rem;
+  margin: 3.5rem auto 0;
   max-width: 60rem;
 }
 
@@ -281,7 +276,7 @@ a { color: var(--paper); }
 
 .card h3 { font-size: 1.35rem; margin-bottom: 0.6rem; }
 
-.card p { color: var(--paper-dim); font-size: 1rem; }
+.card p { color: var(--ink-dim); font-size: 1rem; }
 
 .card-lines {
   height: 26px;
@@ -318,15 +313,40 @@ a { color: var(--paper); }
 
 .step-head h3 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
 
-.step-body p { color: var(--paper-dim); max-width: 40rem; }
+.step-body p { color: var(--ink-dim); max-width: 40rem; }
 
 .step-body p + p { margin-top: 1.25rem; }
 
-.step-roles {
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  color: var(--paper);
-  opacity: 0.85;
+.role-panel {
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--red);
+  padding: 1.5rem 1.75rem 1.75rem;
+  margin-top: 1.75rem;
+  max-width: 40rem;
+}
+
+.role-panel-label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+  margin-bottom: 1rem;
+}
+
+.role-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.role-list li {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.92rem;
+  color: var(--ink);
 }
 
 /* ============ SPEAKERS ============ */
@@ -346,18 +366,18 @@ a { color: var(--paper); }
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--paper);
+  border: 1px solid var(--ink);
   margin: 0 auto 1rem;
   display: block;
 }
 
 .speakers h4 { font-family: var(--font-display); font-size: 1.05rem; }
 
-.speakers .person p { color: var(--paper-dim); font-size: 0.95rem; }
+.speakers .person p { color: var(--ink-dim); font-size: 0.95rem; }
 
 .speakers-note {
   margin-top: 2rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   font-style: italic;
   font-size: 0.98rem;
 }
@@ -369,7 +389,7 @@ a { color: var(--paper); }
   text-align: center;
 }
 
-.cta-note { margin-top: 1.25rem; color: var(--paper-dim); }
+.cta-note { margin-top: 1.25rem; color: var(--ink-dim); }
 
 /* ============ TEAM ============ */
 
@@ -390,7 +410,7 @@ a { color: var(--paper); }
 
 .prose { max-width: 46rem; }
 
-.prose p { color: var(--paper-dim); margin-bottom: 1.5rem; }
+.prose p { color: var(--ink-dim); margin-bottom: 1.5rem; }
 
 .prose p:last-child { margin-bottom: 0; }
 
@@ -412,7 +432,7 @@ a { color: var(--paper); }
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  border: 1px solid var(--paper);
+  border: 1px solid var(--ink);
   margin: 0 auto 1rem;
   background: repeating-linear-gradient(
     90deg,
@@ -423,7 +443,7 @@ a { color: var(--paper); }
 
 .person h3 { font-size: 1.15rem; }
 
-.person p { color: var(--paper-dim); font-size: 0.95rem; }
+.person p { color: var(--ink-dim); font-size: 0.95rem; }
 
 /* ============ FAQ ============ */
 
@@ -449,7 +469,7 @@ a { color: var(--paper); }
 
 .faq summary::after {
   content: "+";
-  color: var(--paper);
+  color: var(--red);
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -458,15 +478,24 @@ a { color: var(--paper); }
 
 .faq details p {
   padding: 0 0 1.5rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   max-width: 44rem;
 }
 
-/* ============ FOOTER ============ */
+/* ============ FOOTER (navy closing band) ============ */
 
 .footer {
   background: var(--navy-deep);
+  color: var(--cream);
   margin-top: 0;
+}
+
+.footer a { color: var(--cream); }
+
+.footer .btn {
+  background: var(--cream);
+  color: var(--navy);
+  border-color: var(--cream);
 }
 
 .footer-lines { line-height: 0; }
@@ -489,14 +518,14 @@ a { color: var(--paper); }
 
 .footer h2 { font-size: 2.2rem; margin-bottom: 0.75rem; }
 
-.footer p { color: var(--paper-dim); margin-bottom: 1.75rem; }
+.footer p { color: var(--cream-dim); margin-bottom: 1.75rem; }
 
 .footer-meta {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   text-align: right;
-  color: var(--paper-dim);
+  color: var(--cream-dim);
   font-size: 0.95rem;
 }
 
@@ -504,7 +533,7 @@ a { color: var(--paper); }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--paper);
+  color: var(--cream);
 }
 
 /* ============ ENTRANCES & REVEALS ============ */
