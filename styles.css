@@ -491,15 +491,17 @@ a { color: var(--ink); }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  margin-top: 3.5rem;
+  margin: 3.5rem auto 0;
   max-width: 54rem;
 }
 
 .person { text-align: center; }
 
 .team .person > p {
-  text-align: left;
   margin-top: 0.75rem;
+  max-width: 24rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .prose { max-width: 46rem; }
