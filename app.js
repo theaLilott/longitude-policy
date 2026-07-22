@@ -172,7 +172,7 @@ function buildFooterWave() {
   const svg = document.getElementById("footer-wave");
   if (!svg) return;
 
-  const WHITE = "#ffffff";
+  const WHITE = "#f4efe1"; // the footer's cream text tone, not pure white
   const RED = "#a4161a"; // brighter than the wine so it reads on navy
   let lines = [];
 
