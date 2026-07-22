@@ -14,9 +14,9 @@
   --navy-deep: #0f1e3a;
   --cream: #f4efe1;
   --cream-dim: rgba(244, 239, 225, 0.72);
-  --red: #c1121f;
-  --red-deep: #9d0e19;
-  --font-display: "Fraunces", Georgia, serif;
+  --red: #a4161a;
+  --red-deep: #7f1114;
+  --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Hanken Grotesk", "Helvetica Neue", sans-serif;
   --max-w: 1160px;
 }
