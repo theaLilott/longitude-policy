@@ -193,7 +193,7 @@ function buildFooterWave() {
       line.setAttribute("y1", H - 34);
       line.setAttribute("stroke", WHITE);
       line.setAttribute("stroke-width", 1.6);
-      line.setAttribute("opacity", 0.95);
+      line.setAttribute("opacity", 0.72);
       if (REDUCED_MOTION && i % 13 === 5) {
         // static red accents instead of the twinkle
         line.setAttribute("stroke", RED);
