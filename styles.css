@@ -5,8 +5,8 @@
    ============================================================ */
 
 :root {
-  --bg: #faf6ec;
-  --bg-alt: #f0e9d8;
+  --bg: #fdfbf5;
+  --bg-alt: #f4efe2;
   --ink: #16294a;
   --ink-dim: rgba(22, 41, 74, 0.72);
   --line: rgba(22, 41, 74, 0.18);
@@ -14,8 +14,8 @@
   --navy-deep: #0f1e3a;
   --cream: #f4efe1;
   --cream-dim: rgba(244, 239, 225, 0.72);
-  --red: #b23b3b;
-  --red-deep: #8f2e2e;
+  --red: #c1121f;
+  --red-deep: #9d0e19;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Hanken Grotesk", "Helvetica Neue", sans-serif;
   --max-w: 1160px;
@@ -163,7 +163,6 @@ a { color: var(--ink); }
 
 .manifesto {
   font-family: var(--font-display);
-  font-style: italic;
   font-weight: 500;
   font-size: clamp(1.45rem, 2.8vw, 2.1rem);
   line-height: 1.5;

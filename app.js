@@ -79,7 +79,11 @@ function buildCapitol() {
   }
 
   if (REDUCED_MOTION) {
-    lines.forEach((l) => l.el.setAttribute("opacity", 0.9));
+    lines.forEach((l, i) => {
+      l.el.setAttribute("opacity", 0.9);
+      // static red accents instead of the animated twinkle
+      if (i % 13 === 5) l.el.setAttribute("stroke", "#c1121f");
+    });
     return;
   }
 
@@ -92,7 +96,7 @@ function buildCapitol() {
   const SWEEP = 5200; // ms from the first (rightmost) to the last line
   const SETTLED = 0.92; // opacity of every placed line
   const PAPER = "#16294a"; // settled stroke: navy ink on the paper ground
-  const RED = "#b23b3b";
+  const RED = "#c1121f";
 
   let start = null;
   let prevHead = null;
@@ -123,13 +127,32 @@ function buildCapitol() {
   requestAnimationFrame(frame);
 
   /* rAF pauses while the window is hidden or occluded, which can leave
-     the drawing frozen mid-sweep; guarantee the finished facade */
+     the drawing frozen mid-sweep; guarantee the finished facade, then
+     start the red twinkle */
   setTimeout(() => {
     for (const l of lines) {
       l.el.setAttribute("stroke", PAPER);
       l.el.setAttribute("opacity", SETTLED);
+      l.el.style.transition = "stroke 0.6s ease, opacity 0.6s ease";
     }
+    startTwinkle(lines, PAPER, RED, SETTLED);
   }, SWEEP + 600);
+}
+
+/* ---------- red twinkle ----------
+   After the facade settles, single lines briefly glow red and fade
+   back, so a few red lines are always alive in the drawing: the
+   building keeps its red lines. */
+function startTwinkle(lines, ink, red, settled) {
+  setInterval(() => {
+    const l = lines[Math.floor(Math.random() * lines.length)];
+    l.el.setAttribute("stroke", red);
+    l.el.setAttribute("opacity", 1);
+    setTimeout(() => {
+      l.el.setAttribute("stroke", ink);
+      l.el.setAttribute("opacity", settled);
+    }, 1600 + Math.random() * 1400);
+  }, 700);
 }
 
 /* ---------- footer strip: uniform lines with the same
