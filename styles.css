@@ -120,41 +120,50 @@ a { color: var(--paper); }
   letter-spacing: -0.01em;
 }
 
-.hero-tagline {
-  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
-  margin-top: 0.75rem;
-  color: var(--paper-dim);
-}
-
-.hero-box {
-  border: 1px solid var(--paper);
-  border-left: 4px solid var(--red);
-  padding: 2.25rem 2rem;
-  margin-top: 2.5rem;
-  max-width: 34rem;
-}
-
-.hero-box-kicker {
+.hero-kicker {
   display: block;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--paper);
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
 }
 
-.hero-box-title {
-  font-size: clamp(1.7rem, 3vw, 2.3rem);
-  margin-bottom: 0.75rem;
+.hero-tagline {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin-top: 0.75rem;
+  color: var(--paper);
 }
 
-.hero-box p { color: var(--paper-dim); }
+.hero-sub {
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  color: var(--paper-dim);
+  font-size: 1.1rem;
+}
+
+.hero-status {
+  margin-top: 1.75rem;
+  font-style: italic;
+  color: var(--paper-dim);
+}
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+/* ============ MANIFESTO ============ */
+
+.manifesto {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  line-height: 1.5;
+  max-width: 54rem;
+  margin: 0 auto;
 }
 
 .hero-art {
@@ -246,13 +255,14 @@ a { color: var(--paper); }
   max-width: 60rem;
 }
 
-/* ============ CARDS (why section) ============ */
+/* ============ CARDS (selection criteria) ============ */
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 3.5rem;
+  max-width: 60rem;
 }
 
 .card {
@@ -275,103 +285,101 @@ a { color: var(--paper); }
   width: 72px;
 }
 
-/* ============ PILLARS (DC intensive) ============ */
+/* ============ PHASES (program structure) ============ */
 
-.pillars {
+.phases {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1.4fr 1fr;
   gap: 1.5rem;
   margin: 3rem auto;
 }
 
-.pillar {
+.phase {
   border: 1px solid var(--line);
   border-top: 2px solid var(--red);
   background: var(--navy);
   padding: 2rem;
 }
 
-.pillar-num {
+.phase-days {
   font-family: var(--font-display);
   color: var(--paper);
   font-size: 0.95rem;
+  text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.pillar h3 { font-size: 1.45rem; margin: 0.5rem 0 1rem; }
+.phase h3 { font-size: 1.45rem; margin: 0.5rem 0 1rem; }
 
-.pillar ul { list-style: none; }
+.phase p { color: var(--paper-dim); font-size: 1rem; }
 
-.pillar li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--paper-dim);
-  font-size: 1rem;
+.role-grid {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
 }
 
-.pillar li:last-child { border-bottom: none; }
+.role-grid li {
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.92rem;
+  color: var(--paper);
+}
 
-.who { margin: 4rem auto 0; }
+.exercise-callout {
+  border: 1px solid var(--paper);
+  border-left: 4px solid var(--red);
+  padding: 2.25rem 2rem;
+  max-width: 54rem;
+  margin: 3rem 0 0;
+}
 
-.who h3, .timeline h3 { font-size: 1.6rem; margin-bottom: 1.25rem; }
+.exercise-callout h3 { font-size: 1.45rem; margin-bottom: 0.75rem; }
 
-/* ============ TIMELINE ============ */
+.exercise-callout p { color: var(--paper-dim); }
 
-.timeline { margin: 4rem auto 0; }
+.program-note {
+  margin-top: 2.5rem;
+  max-width: 46rem;
+  color: var(--paper-dim);
+}
 
-.timeline ol {
-  list-style: none;
-  counter-reset: step;
+/* ============ SPEAKERS ============ */
+
+.speakers-block { margin-top: 4.5rem; }
+
+.speakers-block h3 { font-size: 1.6rem; margin: 1rem 0 2rem; }
+
+.speakers {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-.timeline li {
-  counter-increment: step;
-  position: relative;
-  padding-top: 1rem;
-}
-
-/* the red rule draws itself in when the section reveals
-   (::after — ::before holds the step number) */
-.timeline li::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) 0.2s;
-}
-
-.reveal.visible .timeline li::after { transform: scaleX(1); }
-
-.reveal.visible .timeline li:nth-child(2)::after { transition-delay: 0.4s; }
-.reveal.visible .timeline li:nth-child(3)::after { transition-delay: 0.6s; }
-.reveal.visible .timeline li:nth-child(4)::after { transition-delay: 0.8s; }
-
-.timeline li::before {
-  content: counter(step, decimal-leading-zero);
-  font-family: var(--font-display);
-  color: var(--paper);
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
+.person-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--paper);
+  margin: 0 auto 1rem;
   display: block;
-  margin-bottom: 0.4rem;
 }
 
-.timeline li strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  margin-bottom: 0.3rem;
+.speakers h4 { font-family: var(--font-display); font-size: 1.05rem; }
+
+/* ============ HONEST NOTE ============ */
+
+.honest-note {
+  margin-top: 3.5rem;
+  max-width: 54rem;
+  border-left: 4px solid var(--red);
+  padding-left: 1.75rem;
 }
 
-.timeline li span { color: var(--paper-dim); font-size: 0.98rem; }
+.honest-note p { color: var(--paper-dim); font-size: 1.1rem; }
 
 /* ============ CTA ============ */
 
@@ -382,73 +390,42 @@ a { color: var(--paper); }
 
 .cta-note { margin-top: 1.25rem; color: var(--paper-dim); }
 
-/* ============ EVENTS ============ */
-
-.events-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.event {
-  border: 1px solid var(--line);
-  padding: 2.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.event-date {
-  color: var(--paper);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-.event h3 { font-size: 1.4rem; }
-
-.event p { color: var(--paper-dim); flex: 1; }
-
-.event-meta { font-size: 0.95rem; color: var(--paper-dim); }
-
-/* ============ PARTNERS (inside DC Intensive) ============ */
-
-.partners-block { margin-top: 4.5rem; }
-
-.partners {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: stretch;
-}
-
-/* logo slots — swap the text for <img> once logo files exist */
-.partner {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--line);
-  padding: 1.1rem 1.6rem;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.05rem;
-  opacity: 0.9;
-}
-
-.partner img {
-  max-height: 44px;
-  max-width: 190px;
-  display: block;
-}
-
 /* ============ TEAM ============ */
 
 .team {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   margin-top: 3.5rem;
+  max-width: 54rem;
 }
 
 .person { text-align: center; }
+
+.person > p {
+  text-align: left;
+  margin-top: 0.75rem;
+}
+
+.prose { max-width: 46rem; }
+
+.prose p { color: var(--paper-dim); margin-bottom: 1.5rem; }
+
+.prose p:last-child { margin-bottom: 0; }
+
+.page-hero { padding-top: 4rem; }
+
+/* hidden from sight and screen readers, present in the page text
+   (AI-use canary for application drafting) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .person-avatar {
   width: 130px;
@@ -557,9 +534,10 @@ a { color: var(--paper); }
   to { opacity: 1; transform: none; }
 }
 
+.hero-kicker { animation: rise 0.7s 0.02s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
 .hero h1 { animation: rise 0.7s 0.05s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
 .hero-tagline { animation: rise 0.7s 0.2s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
-.hero-box { animation: rise 0.7s 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
+.hero-sub, .hero-status, .hero-ctas { animation: rise 0.7s 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) both; }
 
 /* sections fade up as they enter the viewport */
 .reveal {
@@ -574,33 +552,32 @@ a { color: var(--paper); }
 }
 
 /* ...and their cards arrive one after another */
-.reveal :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+.reveal :is(.stat, .phase, .card, .person, .faq details) {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.3, 1),
     transform 0.6s cubic-bezier(0.22, 0.7, 0.3, 1);
 }
 
-.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+.reveal.visible :is(.stat, .phase, .card, .person, .faq details) {
   opacity: 1;
   transform: none;
 }
 
-.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(2) { transition-delay: 0.12s; }
-.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(3) { transition-delay: 0.24s; }
-.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(4) { transition-delay: 0.36s; }
-.reveal.visible :is(.stat, .pillar, .event, .partner, .person, .faq details):nth-child(5) { transition-delay: 0.48s; }
+.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(2) { transition-delay: 0.12s; }
+.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(3) { transition-delay: 0.24s; }
+.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(4) { transition-delay: 0.36s; }
+.reveal.visible :is(.stat, .phase, .card, .person, .faq details):nth-child(5) { transition-delay: 0.48s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero h1, .hero-tagline, .hero-box { animation: none; }
+  .hero h1, .hero-tagline, .hero-sub, .hero-status, .hero-ctas { animation: none; }
   .reveal,
-  .reveal :is(.stat, .pillar, .event, .partner, .person, .faq details) {
+  .reveal :is(.stat, .phase, .card, .person, .faq details) {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .timeline li::after { transform: none; transition: none; }
 }
 
 /* ============ RESPONSIVE ============ */
@@ -610,10 +587,9 @@ a { color: var(--paper); }
   .hero-art { order: -1; }
   .hero-copy { justify-self: start; padding: 0 2rem 2.5rem 0; }
   .stats { grid-template-columns: 1fr 1fr; }
-  .cards, .pillars { grid-template-columns: 1fr; }
+  .cards, .phases, .team { grid-template-columns: 1fr; }
+  .speakers { grid-template-columns: 1fr 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 1.25rem; }
-  .timeline ol { grid-template-columns: 1fr 1fr; }
-  .events-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
   .footer-meta { text-align: left; }
   .nav { flex-direction: column; gap: 1rem; align-items: flex-start; }
