@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand kit · Longitude DC Intensive</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="assets/longitude-capitol-badge.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair:opsz,wght@5..1200,400..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdfbf5;
+      --bg-alt: #f4efe2;
+      --ink: #16294a;
+      --ink-dim: rgba(22, 41, 74, 0.72);
+      --line: rgba(22, 41, 74, 0.18);
+      --navy-deep: #0f1e3a;
+      --cream: #f4efe1;
+      --wine: #6e1423;
+      --red-bright: #a4161a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Playfair", Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.65;
+      padding: 3rem 1.5rem 5rem;
+    }
+    main { max-width: 60rem; margin: 0 auto; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 0.5rem; }
+    .subtitle { color: var(--ink-dim); margin-bottom: 3.5rem; }
+    h2 {
+      font-size: 1.7rem;
+      margin: 3.5rem 0 1.25rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--line);
+    }
+    h2::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 3px;
+      background: var(--wine);
+      margin-top: 0.6rem;
+    }
+    p { color: var(--ink-dim); max-width: 44rem; margin-bottom: 1rem; }
+    strong { color: var(--ink); }
+    code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.85em;
+      background: var(--bg-alt);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .swatch { border: 1px solid var(--line); }
+    .swatch-color { height: 84px; }
+    .swatch-info { padding: 0.7rem 0.9rem; font-size: 0.9rem; }
+    .swatch-info b { display: block; color: var(--ink); font-size: 0.98rem; }
+    .swatch-info span { color: var(--ink-dim); }
+
+    .type-sample { border: 1px solid var(--line); padding: 1.75rem 2rem; margin: 1rem 0; }
+    .type-sample .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-dim);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .t-hero { font-size: 2.6rem; font-weight: 700; line-height: 1.15; }
+    .t-heading { font-size: 1.9rem; font-weight: 600; line-height: 1.2; }
+    .t-kicker {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red-bright);
+    }
+    .t-body { color: var(--ink-dim); max-width: 38rem; }
+
+    .logos { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1.5rem 0; align-items: stretch; }
+    .logo-tile {
+      border: 1px solid var(--line);
+      padding: 1.5rem;
+      text-align: center;
+      flex: 1 1 220px;
+    }
+    .logo-tile.dark { background: var(--navy-deep); }
+    .logo-tile img { max-width: 190px; width: 100%; height: auto; }
+    .logo-tile .cap { font-size: 0.9rem; color: var(--ink-dim); margin-top: 1rem; }
+    .logo-tile.dark .cap { color: var(--cream); opacity: 0.85; }
+
+    .motif-demo { border: 1px solid var(--line); padding: 2rem; margin: 1.5rem 0; }
+    .motif-lines {
+      height: 60px;
+      background:
+        repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 10px);
+      position: relative;
+      opacity: 0.9;
+    }
+    .motif-red {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--wine);
+    }
+    ul.rules { margin: 0.5rem 0 1rem 1.2rem; color: var(--ink-dim); max-width: 44rem; }
+    ul.rules li { margin-bottom: 0.5rem; }
+    table { border-collapse: collapse; margin: 1rem 0; font-size: 0.98rem; }
+    td, th { border: 1px solid var(--line); padding: 0.5rem 0.9rem; text-align: left; }
+    th { color: var(--ink); font-weight: 600; }
+    td { color: var(--ink-dim); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Longitude DC Intensive</h1>
+  <p class="subtitle">Brand kit · for posts, slides, and anything carrying the program's look</p>
+
+  <h2>Colors</h2>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#16294a"></div>
+      <div class="swatch-info"><b>Navy ink</b><span><code>#16294a</code> · text, lines, buttons</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0f1e3a"></div>
+      <div class="swatch-info"><b>Deep navy</b><span><code>#0f1e3a</code> · dark bands, footer</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#fdfbf5; border-bottom:1px solid rgba(22,41,74,0.18)"></div>
+      <div class="swatch-info"><b>Warm white</b><span><code>#fdfbf5</code> · main background</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f4efe2"></div>
+      <div class="swatch-info"><b>Cream tint</b><span><code>#f4efe2</code> · alternate background</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f4efe1"></div>
+      <div class="swatch-info"><b>Cream</b><span><code>#f4efe1</code> · text and lines on navy</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6e1423"></div>
+      <div class="swatch-info"><b>Wine red</b><span><code>#6e1423</code> · accent on light backgrounds</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#a4161a"></div>
+      <div class="swatch-info"><b>Bright red</b><span><code>#a4161a</code> · accent on navy backgrounds</span></div>
+    </div>
+  </div>
+  <ul class="rules">
+    <li>Secondary text is navy ink at 72% opacity: <code>rgba(22, 41, 74, 0.72)</code>.</li>
+    <li>Hairlines and borders are navy ink at 18% opacity: <code>rgba(22, 41, 74, 0.18)</code>.</li>
+    <li>Red is an accent, never a surface: one or two red elements per design, small.</li>
+    <li>Wine red on light grounds, bright red on navy; never both in one design.</li>
+  </ul>
+
+  <h2>Typography</h2>
+  <p><strong>Playfair</strong> (the variable family with optical sizing, not "Playfair Display") is the only typeface, for headlines and body alike. Free on Google Fonts; fallback Georgia. On LinkedIn images, set headlines in Playfair 600 to 700 and keep body text at 400 to 500.</p>
+  <div class="type-sample">
+    <span class="label">Hero / poster headline · Playfair 700</span>
+    <div class="t-hero">Longitude DC&nbsp;Intensive</div>
+  </div>
+  <div class="type-sample">
+    <span class="label">Section heading · Playfair 600, with the 52px wine underline stub</span>
+    <div class="t-heading">Who should apply</div>
+  </div>
+  <div class="type-sample">
+    <span class="label">Kicker label · uppercase, letterspaced 0.16em, red</span>
+    <div class="t-kicker">Two weeks in Washington, DC · Late September 2026</div>
+  </div>
+  <div class="type-sample">
+    <span class="label">Body · Playfair 400, 18px, line-height 1.65, ink at 72%</span>
+    <p class="t-body">A fully funded two-week program for people in AI safety who are curious about policy and want to know, not guess, whether it is where they should go next.</p>
+  </div>
+
+  <h2>Logo</h2>
+  <div class="logos">
+    <div class="logo-tile">
+      <img src="assets/longitude-capitol-badge.svg" alt="Badge logo">
+      <div class="cap">Badge · any background · avatars, favicons, stamps<br><code>assets/longitude-capitol-badge.svg</code></div>
+    </div>
+    <div class="logo-tile">
+      <img src="assets/longitude-capitol.svg" alt="Capitol wordless logo">
+      <div class="cap">Capitol · light backgrounds only · wide headers, banners<br><code>assets/longitude-capitol.svg</code></div>
+    </div>
+  </div>
+  <ul class="rules">
+    <li>Never recolor the logos; the red lines stay red.</li>
+    <li>Give the badge clear space of at least a quarter of its diameter.</li>
+    <li>On navy, use the badge (it carries its own light disc), not the bare Capitol.</li>
+  </ul>
+
+  <h2>The line motif</h2>
+  <div class="motif-demo">
+    <div class="motif-lines">
+      <div class="motif-red" style="left: 12%"></div>
+      <div class="motif-red" style="left: 63%"></div>
+    </div>
+  </div>
+  <p>Fine, evenly spaced vertical lines are the brand's signature: lines of longitude. A few of them, roughly one in thirteen, are red and slightly thicker, the red lines AI development should not cross. Rules of thumb:</p>
+  <ul class="rules">
+    <li>Navy lines on light grounds, cream lines on navy grounds.</li>
+    <li>Line thickness ratio about 1 : 2 (regular : red), spacing 4 to 6 times the line width.</li>
+    <li>Use the motif as an edge or band (top, bottom, or side of a design), not as a full-page texture.</li>
+  </ul>
+
+  <h2>Quick recipe for a LinkedIn post</h2>
+  <table>
+    <tr><th>Element</th><th>Spec</th></tr>
+    <tr><td>Background</td><td>Warm white <code>#fdfbf5</code> (or deep navy <code>#0f1e3a</code> for a dark card)</td></tr>
+    <tr><td>Headline</td><td>Playfair 700, navy ink (cream on navy)</td></tr>
+    <tr><td>Kicker or date line</td><td>Uppercase, letterspaced, wine red (bright red on navy)</td></tr>
+    <tr><td>Body</td><td>Playfair 400 to 500, ink at 72%</td></tr>
+    <tr><td>Accent</td><td>One line-motif band or the badge in a corner, not both large</td></tr>
+    <tr><td>Button look</td><td>Navy rectangle, cream text, 3px corner radius</td></tr>
+  </table>
+  <p>Tone in one line: direct and warm, second person, concrete numbers before adjectives, no hype words.</p>
+</main>
+</body>
+</html>
