@@ -29,7 +29,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -95,7 +95,7 @@ a { color: var(--ink); }
 
 .btn-ghost { background: transparent; color: var(--ink); }
 
-.btn-small { padding: 0.4rem 1rem; font-size: 0.95rem; }
+.btn-small { padding: 0.4rem 1rem; font-size: 1rem; }
 
 .btn-large { padding: 1rem 2.2rem; font-size: 1.1rem; }
 
@@ -126,7 +126,7 @@ a { color: var(--ink); }
 
 .hero-kicker {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--red);
@@ -214,7 +214,7 @@ a { color: var(--ink); }
 }
 
 .stat-label {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--ink-dim);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -290,7 +290,7 @@ a { color: var(--ink); }
 
 .card h3 { font-size: 1.35rem; margin-bottom: 0.6rem; }
 
-.card p { color: var(--ink-dim); font-size: 1rem; }
+.card p { color: var(--ink-dim); font-size: 1.0625rem; }
 
 .card-lines {
   height: 18px;
@@ -362,7 +362,7 @@ a { color: var(--ink); }
 
 .role-panel-label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--ink-dim);
@@ -380,7 +380,7 @@ a { color: var(--ink); }
   border: 1px solid var(--line);
   background: var(--bg);
   padding: 0.4rem 0.85rem;
-  font-size: 0.92rem;
+  font-size: 1rem;
   color: var(--ink);
 }
 
@@ -404,13 +404,13 @@ a { color: var(--ink); }
 
 .speakers h4 { font-family: var(--font-display); font-size: 1.05rem; }
 
-.speakers .person p { color: var(--ink-dim); font-size: 0.95rem; }
+.speakers .person p { color: var(--ink-dim); font-size: 1rem; }
 
 .speakers-note {
   margin-top: 2rem;
   color: var(--ink-dim);
   font-style: italic;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
 }
 
 /* ============ CTA ============ */
@@ -474,7 +474,7 @@ a { color: var(--ink); }
 
 .person h3 { font-size: 1.15rem; }
 
-.person p { color: var(--ink-dim); font-size: 0.95rem; }
+.person p { color: var(--ink-dim); font-size: 1rem; }
 
 /* ============ FAQ ============ */
 
@@ -488,7 +488,7 @@ a { color: var(--ink); }
   cursor: pointer;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   padding: 1.25rem 0;
   list-style: none;
   display: flex;
@@ -529,7 +529,7 @@ a { color: var(--ink); }
   border-color: var(--cream);
 }
 
-.footer-lines { line-height: 0; }
+.footer-lines { line-height: 0; background: var(--bg); }
 
 #footer-wave {
   width: 100%;
@@ -557,7 +557,7 @@ a { color: var(--ink); }
   gap: 0.5rem;
   text-align: right;
   color: var(--cream-dim);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .footer-brand {

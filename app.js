@@ -36,12 +36,6 @@ function capitolHeight(u) {
   return 0.26;
 }
 
-/* traveling opacity wave: a dim band sweeps right-to-left across the lines */
-function waveOpacity(x, t) {
-  const w = 0.5 + 0.5 * Math.sin(t / 1100 + x / 95);
-  return 0.1 + 0.85 * Math.pow(w, 1.4);
-}
-
 function buildCapitol() {
   const svg = document.getElementById("capitol");
   if (!svg) return;
@@ -82,7 +76,10 @@ function buildCapitol() {
     lines.forEach((l, i) => {
       l.el.setAttribute("opacity", 0.9);
       // static red accents instead of the animated twinkle
-      if (i % 13 === 5) l.el.setAttribute("stroke", "#6e1423");
+      if (i % 13 === 5) {
+        l.el.setAttribute("stroke", "#6e1423");
+        l.el.setAttribute("stroke-width", 3.2);
+      }
     });
     return;
   }
@@ -133,63 +130,60 @@ function buildCapitol() {
     for (const l of lines) {
       l.el.setAttribute("stroke", PAPER);
       l.el.setAttribute("opacity", SETTLED);
-      l.el.style.transition = "stroke 0.6s ease, opacity 0.6s ease";
+      l.el.style.transition =
+        "stroke 0.6s ease, opacity 0.6s ease, stroke-width 0.6s ease";
     }
-    startTwinkle(lines, PAPER, RED, SETTLED);
+    startTwinkle(lines, PAPER, RED, SETTLED, STROKE);
   }, SWEEP + 600);
 }
 
 /* ---------- red twinkle ----------
-   After the facade settles, single lines briefly glow red and fade
-   back, so a few red lines are always alive in the drawing: the
-   building keeps its red lines. */
-function startTwinkle(lines, ink, red, settled) {
+   After the facade settles, single lines briefly glow red, slightly
+   thicker so they stand out, and fade back; a few red lines are
+   always alive in the drawing: the building keeps its red lines. */
+function startTwinkle(lines, ink, red, settled, baseWidth) {
   setInterval(() => {
     const l = lines[Math.floor(Math.random() * lines.length)];
     l.el.setAttribute("stroke", red);
     l.el.setAttribute("opacity", 1);
+    l.el.setAttribute("stroke-width", 3.2);
     setTimeout(() => {
       l.el.setAttribute("stroke", ink);
       l.el.setAttribute("opacity", settled);
+      l.el.setAttribute("stroke-width", baseWidth);
     }, 1600 + Math.random() * 1400);
   }, 700);
 }
 
-/* ---------- footer strip: uniform lines with the same
-   disappear/reappear wave, echoing the hero motif ---------- */
+/* ---------- footer strip ----------
+   Static longitude lines on the light ground, dipping into the navy
+   band: same navy-with-occasional-red language as the Capitol, no
+   animation. Line heights vary gently so the strip reads as a quiet
+   skyline rather than a solid bar. */
 function buildFooterWave() {
   const svg = document.getElementById("footer-wave");
   if (!svg) return;
 
   const W = 1600;
   const H = 90;
-  const GAP = 6;
+  const GAP = 8;
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.setAttribute("preserveAspectRatio", "none");
 
-  const lines = [];
-  for (let x = 3; x < W; x += GAP) {
+  let i = 0;
+  for (let x = 4; x < W; x += GAP, i++) {
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    const h = 26 + 14 * Math.abs(Math.sin(i / 7)); // gentle height variation
+    const red = i % 13 === 5;
     line.setAttribute("x1", x);
     line.setAttribute("x2", x);
     line.setAttribute("y2", H);
-    line.setAttribute("y1", H - 34);
-    line.setAttribute("stroke", "#f4efe1");
-    line.setAttribute("stroke-width", 1.2);
-    line.setAttribute("opacity", 0.25);
+    line.setAttribute("y1", H - h);
+    line.setAttribute("stroke", red ? "#6e1423" : "#16294a");
+    line.setAttribute("stroke-width", red ? 2.4 : 1.4);
+    line.setAttribute("opacity", red ? 0.85 : 0.4);
     svg.appendChild(line);
-    lines.push({ el: line, x });
   }
-
-  if (REDUCED_MOTION) return;
-
-  function frame(now) {
-    for (const l of lines) {
-      l.el.setAttribute("opacity", (0.35 * waveOpacity(l.x, now)).toFixed(3));
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
 }
 
 /* ---------- scroll reveal ----------
