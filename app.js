@@ -48,6 +48,9 @@ function buildCapitol() {
   const STROKE = 1.7;
 
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  // anchor the building to the bottom center so a height-capped
+  // mobile hero scales it down instead of cropping the dome
+  svg.setAttribute("preserveAspectRatio", "xMidYMax meet");
 
   const cx = W / 2;
   const half = W / 2 - 4;
@@ -161,29 +164,101 @@ function startTwinkle(lines, ink, red, settled, baseWidth) {
 }
 
 /* ---------- footer strip ----------
-   Uniform cream longitude lines on the navy band, static: the
-   original footer look, without the sweep animation. */
+   Uniform cream longitude lines on the navy band, static. Drawn at
+   1 svg unit = 1 css px (viewBox matches the element width) so line
+   thickness and spacing stay identical on every screen size, and
+   rebuilt on resize. */
 function buildFooterWave() {
   const svg = document.getElementById("footer-wave");
   if (!svg) return;
 
-  const W = 1600;
-  const H = 90;
-  const GAP = 6;
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.setAttribute("preserveAspectRatio", "none");
+  function draw() {
+    const W = Math.max(320, Math.round(svg.clientWidth || 1600));
+    const H = 90;
+    const GAP = 10;
+    svg.innerHTML = "";
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-  for (let x = 3; x < W; x += GAP) {
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", x);
-    line.setAttribute("x2", x);
-    line.setAttribute("y2", H);
-    line.setAttribute("y1", H - 34);
-    line.setAttribute("stroke", "#f4efe1");
-    line.setAttribute("stroke-width", 1.2);
-    line.setAttribute("opacity", 0.25);
-    svg.appendChild(line);
+    for (let x = 5; x < W; x += GAP) {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", x);
+      line.setAttribute("x2", x);
+      line.setAttribute("y2", H);
+      line.setAttribute("y1", H - 34);
+      line.setAttribute("stroke", "#f4efe1");
+      line.setAttribute("stroke-width", 1.6);
+      line.setAttribute("opacity", 0.3);
+      svg.appendChild(line);
+    }
   }
+
+  draw();
+  let t = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(t);
+    t = setTimeout(draw, 200);
+  });
+}
+
+/* ---------- mobile nav toggle ---------- */
+function initNavToggle() {
+  const nav = document.querySelector(".nav");
+  const btn = document.querySelector(".nav-toggle");
+  if (!nav || !btn) return;
+
+  btn.addEventListener("click", () => {
+    const open = nav.classList.toggle("nav-open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  // close the menu when a link is chosen
+  nav.querySelectorAll(".nav-links a").forEach((a) =>
+    a.addEventListener("click", () => {
+      nav.classList.remove("nav-open");
+      btn.setAttribute("aria-expanded", "false");
+    })
+  );
+}
+
+/* ---------- scroll-driven steps rail ----------
+   The red line travels down the 1-2-3 rail as you scroll, and each
+   number fills in when the line reaches it. */
+function initStepsRail() {
+  const steps = [...document.querySelectorAll(".step")];
+  if (!steps.length) return;
+
+  if (REDUCED_MOTION) {
+    steps.forEach((s) => {
+      s.style.setProperty("--fill", 1);
+      s.classList.add("lit");
+    });
+    return;
+  }
+
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const trigger = window.innerHeight * 0.72;
+    for (const s of steps) {
+      const r = s.getBoundingClientRect();
+      const segTop = r.top + 44;
+      const segH = Math.max(1, r.height - 48);
+      const fill = Math.min(1, Math.max(0, (trigger - segTop) / segH));
+      s.style.setProperty("--fill", fill.toFixed(3));
+      s.classList.toggle("lit", r.top + 20 < trigger);
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
 }
 
 /* ---------- scroll reveal ----------
@@ -204,3 +279,5 @@ function initReveal() {
 buildCapitol();
 buildFooterWave();
 initReveal();
+initNavToggle();
+initStepsRail();
