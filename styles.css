@@ -14,10 +14,10 @@
   --navy-deep: #0f1e3a;
   --cream: #f4efe1;
   --cream-dim: rgba(244, 239, 225, 0.72);
-  --red: #a4161a;
-  --red-deep: #7f1114;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Hanken Grotesk", "Helvetica Neue", sans-serif;
+  --red: #6e1423;
+  --red-deep: #4f0e19;
+  --font-display: "Playfair", "Playfair Display", Georgia, serif;
+  --font-body: "Playfair", "Playfair Display", Georgia, serif;
   --max-w: 1160px;
 }
 
@@ -183,7 +183,7 @@ a { color: var(--ink); }
   width: clamp(106%, 30vw + 500px, 143%);
   height: auto;
   display: block;
-  opacity: 0.55; /* soften the navy lines against the paper */
+  opacity: 0.82; /* navy lines read as dark blue, not grey */
 }
 
 /* ============ STATS (one contained strip) ============ */

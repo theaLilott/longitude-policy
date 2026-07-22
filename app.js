@@ -82,7 +82,7 @@ function buildCapitol() {
     lines.forEach((l, i) => {
       l.el.setAttribute("opacity", 0.9);
       // static red accents instead of the animated twinkle
-      if (i % 13 === 5) l.el.setAttribute("stroke", "#a4161a");
+      if (i % 13 === 5) l.el.setAttribute("stroke", "#6e1423");
     });
     return;
   }
@@ -96,7 +96,7 @@ function buildCapitol() {
   const SWEEP = 5200; // ms from the first (rightmost) to the last line
   const SETTLED = 0.92; // opacity of every placed line
   const PAPER = "#16294a"; // settled stroke: navy ink on the paper ground
-  const RED = "#a4161a";
+  const RED = "#6e1423";
 
   let start = null;
   let prevHead = null;
