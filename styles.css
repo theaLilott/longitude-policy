@@ -5,6 +5,9 @@
    ============================================================ */
 
 :root {
+  /* the site is light by design; opt out of browser auto-darkening,
+     which turned the wine red nearly invisible */
+  color-scheme: only light;
   --bg: #fdfbf5;
   --bg-alt: #f4efe2;
   --ink: #16294a;
